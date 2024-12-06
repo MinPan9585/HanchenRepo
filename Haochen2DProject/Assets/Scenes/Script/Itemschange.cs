@@ -18,6 +18,10 @@ public class Itemschange : MonoBehaviour
     public GameObject objA;
     public GameObject objB;
     public GameObject objC;
+
+    public GameObject PenTuObj1;
+    public GameObject PenTuObj2;
+    public GameObject PenTuObj3;
     void Update()
     {
         // 检测按键"1"并处理道具a的逻辑
@@ -48,6 +52,8 @@ public class Itemschange : MonoBehaviour
             else
             {
                 GiveItem("b");
+
+
                
             }
         }
@@ -92,8 +98,7 @@ public class Itemschange : MonoBehaviour
                 hasItemC = false;
                 Debug.Log("获得了道具b");
                 objB.GetComponent<Image>().sprite = xuanzhongImage_True;
-
-
+                PenTuObj2.SetActive(true);
                 break;
             case "c":
                 stateGame = StateGame.C;
@@ -127,6 +132,9 @@ public class Itemschange : MonoBehaviour
         objB.GetComponent<Image>().sprite = xuanzhongImage_False;
         objC.GetComponent<Image>().sprite = xuanzhongImage_False;
 
+        PenTuObj1.SetActive(false);
+        PenTuObj2.SetActive(false);
+        PenTuObj3.SetActive(false);
     }
 
 

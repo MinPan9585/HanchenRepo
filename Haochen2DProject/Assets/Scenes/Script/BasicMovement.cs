@@ -7,7 +7,9 @@ public class BasicMovement : MonoBehaviour
     public float MoveSpeed;
     public Rigidbody2D myrigidbody;
     public Collider2D mycollider;
-    
+
+    public GameObject imageXuXian;
+
     void Start()
     {
         myrigidbody = GetComponent<Rigidbody2D>();
@@ -19,6 +21,14 @@ public class BasicMovement : MonoBehaviour
     {
         Move();
 
+        if (Input.GetKey(KeyCode.A))
+        {
+            imageXuXian.transform.position += Vector3.left * MoveSpeed * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            imageXuXian.transform.position += Vector3.right * MoveSpeed * Time.deltaTime;
+        }
     }
    void Move()
     {
@@ -27,6 +37,8 @@ public class BasicMovement : MonoBehaviour
         Vector2 playerVel = new(horizontalnum * MoveSpeed, myrigidbody.velocity.y);
 
         myrigidbody.velocity = playerVel;
+
+      
 
     }
 

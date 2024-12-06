@@ -8,18 +8,48 @@ public class NPC_1Control : MonoBehaviour
 
     public GameObject tag1Point;
     public GameObject tag2Point;
+    public GameObject haiouObj;
 
+    public GameObject anjianTisHI;
+    public bool isState = false;
+    public GameObject Scene2;
     public Animator ain; //动画状态机
     // Start is called before the first frame update
     void Start()
     {
-        MoveToTarget1_Event();
+        //MoveToTarget1_Event();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log("当前是否范围内 == " + isState);
+        anjianTisHI.SetActive(isState);
+        //Debug.Log( "  距离："+Vector3.Distance(transform.position, haiouObj.transform.position));
+        if (Vector3.Distance(transform.position, haiouObj.transform.position) < 7)
+        {
+           
+            isState = true;
+
+        }
+        else
+        {
+            //Debug.Log("当前----------");
+            isState = false;
+        }
+
+        if (isState == true)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Debug.Log("当前切换到下一状态");
+                    Scene2.SetActive(true);
+                haiouObj.SetActive(false);
+
+            }
+        }
+
+
     }
 
     public void MoveToTarget1_Event()

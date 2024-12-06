@@ -11,7 +11,7 @@ public class BirdController : MonoBehaviour
     public float responsiveness = 10f;
     //在滚动等情况时的反馈
 
-    private float throttle;
+    public float throttle;
     private float roll;
     private float pitcch;
     private float yaw;
@@ -41,17 +41,20 @@ public class BirdController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space)) throttle += throttleIncrement;
         else if (Input.GetKey(KeyCode.LeftControl)) throttle -= throttleIncrement;
-        throttle = Mathf.Clamp(throttle, 0f, 100f);
+        throttle = Mathf.Clamp(throttle, 0f, 70f);
     }
     private void Update()
     {
         HandleInputs();
+
+        
     }
 
     private void FixedUpdate()
     {
         rb.AddForce(transform.forward * maxThrust * throttle);
-        rb.AddTorque(transform.up * yaw * responseModifier);
+        rb.AddTorque(transform.up * /*Mathf.Clamp(yaw, -30f, 30f)*/yaw * responseModifier);
+        rb.AddTorque(transform.up * /*Mathf.Clamp(yaw, -30f, 30f)*/yaw * responseModifier);
         rb.AddTorque(transform.right * pitcch * responseModifier);
         rb.AddTorque(-transform.forward * roll * rollstep * responseModifier);
 

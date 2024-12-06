@@ -489,8 +489,8 @@ InputManager:
     m_Name: Yaw
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: a
-    positiveButton: d
+    negativeButton: q
+    positiveButton: r
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
