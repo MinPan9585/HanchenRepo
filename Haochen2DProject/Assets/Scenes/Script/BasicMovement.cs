@@ -21,14 +21,7 @@ public class BasicMovement : MonoBehaviour
     {
         Move();
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            imageXuXian.transform.position += Vector3.left * MoveSpeed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            imageXuXian.transform.position += Vector3.right * MoveSpeed * Time.deltaTime;
-        }
+        
     }
    void Move()
     {

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Itemschange : MonoBehaviour
 {
+ 
+
     // 定义道具变量，这里使用bool类型来表示是否持有道具
     private bool hasItemA = false;
     private bool hasItemB = false;
@@ -19,9 +21,18 @@ public class Itemschange : MonoBehaviour
     public GameObject objB;
     public GameObject objC;
 
-    public GameObject PenTuObj1;
-    public GameObject PenTuObj2;
-    public GameObject PenTuObj3;
+    public GameObject cleanObj;
+
+
+    private void Start()
+    {
+        Init();
+    }
+
+    public void Init()
+    {
+        cleanObj.GetComponent<CleanArea>().enabled = false;
+    }
     void Update()
     {
         // 检测按键"1"并处理道具a的逻辑
@@ -98,7 +109,10 @@ public class Itemschange : MonoBehaviour
                 hasItemC = false;
                 Debug.Log("获得了道具b");
                 objB.GetComponent<Image>().sprite = xuanzhongImage_True;
-                PenTuObj2.SetActive(true);
+
+                cleanObj.GetComponent<CleanArea>().enabled = true;
+
+
                 break;
             case "c":
                 stateGame = StateGame.C;
@@ -132,9 +146,8 @@ public class Itemschange : MonoBehaviour
         objB.GetComponent<Image>().sprite = xuanzhongImage_False;
         objC.GetComponent<Image>().sprite = xuanzhongImage_False;
 
-        PenTuObj1.SetActive(false);
-        PenTuObj2.SetActive(false);
-        PenTuObj3.SetActive(false);
+        cleanObj.GetComponent<CleanArea>().enabled = false;
+
     }
 
 
