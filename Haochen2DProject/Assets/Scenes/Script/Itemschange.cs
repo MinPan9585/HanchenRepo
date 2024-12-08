@@ -22,11 +22,19 @@ public class Itemschange : MonoBehaviour
     public GameObject objC;
 
     public GameObject cleanObj;
+    public GameObject cleantoolObj;
+
+    public StateGame currentState;
 
 
     private void Start()
     {
         Init();
+       
+        
+        currentState = StateGame.zero; // 初始化为某个状态
+        
+
     }
 
     public void Init()
@@ -99,7 +107,7 @@ public class Itemschange : MonoBehaviour
                 Debug.Log("获得了道具a");
                 objA.GetComponent<Image>().sprite = xuanzhongImage_True;
 
-                
+                cleantoolObj.GetComponent<ScraperTool>().enabled = true;
 
                 break;
             case "b":
@@ -147,7 +155,7 @@ public class Itemschange : MonoBehaviour
         objC.GetComponent<Image>().sprite = xuanzhongImage_False;
 
         cleanObj.GetComponent<CleanArea>().enabled = false;
-
+        //cleantoolObj.GetComponent<ScraperTool>().enabled = false;
     }
 
 

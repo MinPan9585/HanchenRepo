@@ -10,6 +10,7 @@ public class CleanArea : MonoBehaviour
     public LayerMask clickableLayer; // 定义可以生成泡沫的层
     public GameObject foamPrefab; // 泡沫预制体
     private int foamCount = 0; // 当前泡沫数量
+    private Transform foamTransform; // 泡沫团的Transform
 
     private void Awake()
     {
@@ -36,5 +37,21 @@ public class CleanArea : MonoBehaviour
         // 在Scene视图中绘制有效范围的圈
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+    // 新增的方法，返回泡沫团的位置
+    public Vector3 GetFoamPosition()
+    {
+        // 确保泡沫团已经被实例化
+        if (foamTransform != null)
+        {
+            return foamTransform.position;
+        }
+        else
+        {
+            // 如果没有泡沫团，返回一个默认位置或错误信息
+            Debug.LogError("No foam instance found.");
+            return Vector3.zero;
+        }
     }
 }
