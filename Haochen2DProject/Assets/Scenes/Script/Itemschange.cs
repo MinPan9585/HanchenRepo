@@ -155,7 +155,7 @@ public class Itemschange : MonoBehaviour
         objC.GetComponent<Image>().sprite = xuanzhongImage_False;
 
         cleanObj.GetComponent<CleanArea>().enabled = false;
-        //cleantoolObj.GetComponent<ScraperTool>().enabled = false;
+        cleantoolObj.GetComponent<ScraperTool>().enabled = false;
     }
 
 

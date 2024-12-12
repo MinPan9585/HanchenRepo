@@ -10,7 +10,8 @@ public class CleanArea : MonoBehaviour
     public LayerMask clickableLayer; // 定义可以生成泡沫的层
     public GameObject foamPrefab; // 泡沫预制体
     private int foamCount = 0; // 当前泡沫数量
-    private Transform foamTransform; // 泡沫团的Transform
+    public Transform foamTransform; // 泡沫团的Transform
+    public Transform foamTransformParent; // 泡沫团的Transform
 
     private void Awake()
     {
@@ -21,15 +22,15 @@ public class CleanArea : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && foamCount < 10)
         {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (Vector2.Distance(transform.position, mousePos) <= radius)
-            {
-                // 鼠标在有效范围内
-               GameObject obj =  Instantiate(foamPrefab, mousePos, Quaternion.identity);
-                obj.SetActive(true);
-                foamCount++;
-            }
+            //Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //if (Vector2.Distance(transform.position, foamTransformParent.position) <= radius)
+            //{
+            // 鼠标在有效范围内
+            GameObject obj = Instantiate(foamPrefab, foamTransformParent);
+            obj.SetActive(true);
+            foamCount++;
         }
+        //}
     }
 
     void OnDrawGizmosSelected()

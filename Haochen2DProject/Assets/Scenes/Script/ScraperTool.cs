@@ -24,7 +24,7 @@ public class ScraperTool : MonoBehaviour
     void Start()
     {
         itemsChange = FindObjectOfType<Itemschange>();
-        scrapeLength = maxDeviation; // 设置刮动长度为最大偏离距离
+        //scrapeLength = maxDeviation; // 设置刮动长度为最大偏离距离
     }
 
     void Update()
