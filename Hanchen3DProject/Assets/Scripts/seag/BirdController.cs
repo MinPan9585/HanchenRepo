@@ -19,6 +19,7 @@ public class BirdController : MonoBehaviour
     public float pitchstep = 1;
     public float yawstep = 1;
 
+    public int indexBB=0;
     private float responseModifier
     {
         get
@@ -47,7 +48,10 @@ public class BirdController : MonoBehaviour
     {
         HandleInputs();
 
-        
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            CreateBaBa();
+        }
     }
 
     private void FixedUpdate()
@@ -60,4 +64,15 @@ public class BirdController : MonoBehaviour
 
     }
 
+
+    public void CreateBaBa()
+    {
+        if (indexBB >= 10)
+            return;
+
+        indexBB++;
+        GameObject obj = Instantiate(Resources.Load("baba"),transform) as GameObject; 
+
+           
+    }
 }

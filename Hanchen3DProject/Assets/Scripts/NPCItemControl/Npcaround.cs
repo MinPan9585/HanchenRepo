@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PointEnter_Control : MonoBehaviour
+public class Npcaround : MonoBehaviour
 {
-
-    public GameObject niaoObj;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,9 +15,4 @@ public class PointEnter_Control : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        //Debug.Log("碰撞到的名称"+other.name  +"自身名称" + name);
-    }
-
 }

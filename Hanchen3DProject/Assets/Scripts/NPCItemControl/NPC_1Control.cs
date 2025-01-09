@@ -25,7 +25,7 @@ public class NPC_1Control : MonoBehaviour
 
     void Start()
     {
-        //MoveToTarget1_Event();
+        MoveToTarget1_Event();
     }
 
     // Update is called once per frame
