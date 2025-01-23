@@ -40,16 +40,10 @@ public class AnimationControl_Player : MonoBehaviour
 
                 }
                 else
-                { 
+                {
                     Debug.Log("Q逻辑完成");
                     ani.speed = 1f;
                     jinduImage.fillAmount += 0.35f;
-                    if (jinduImage.fillAmount >= 1)
-                    {
-                        Debug.Log("进入下一个场景 ");
-                        //进入下一个场景 
-                    }
-
                 }
                 isQ = false;
                 qTime = 0;
@@ -57,25 +51,22 @@ public class AnimationControl_Player : MonoBehaviour
             }
         }
 
-        if (isT== true)
+        if (isT == true)
         {
             tTime += Time.deltaTime;
 
             if (Input.GetKeyDown(KeyCode.S))
             {
-                if (tTime >= 3) 
+                if (tTime >= 3)
                 {
                     Debug.Log("时间超过了3秒");
                 }
                 else
-                { 
-                Debug.Log("T逻辑完成");
-                ani.speed = 1f;
+                {
+                    Debug.Log("T逻辑完成");
+                    ani.speed = 1f;
                     jinduImage.fillAmount += 0.35f;
-                    if (jinduImage.fillAmount >= 1)
-                    {
-                        Debug.Log("进入下一个场景 ");
-                    }
+
                 }
 
                 isT = false;
@@ -88,31 +79,31 @@ public class AnimationControl_Player : MonoBehaviour
             eTime += Time.deltaTime;
             if (Input.GetKeyDown(KeyCode.D))
             {
-                if(eTime >= 3)
-                { 
+                if (eTime >= 3)
+                {
                     Debug.Log("时间超过了3秒");
                 }
-                else 
-                { 
-                Debug.Log("E逻辑完成");
+                else
+                {
+                    Debug.Log("E逻辑完成");
                     jinduImage.fillAmount += 0.35f;
-                    if (jinduImage.fillAmount >= 1)
-                    {
-                        Debug.Log("进入下一个场景 ");
-                    }
 
-
-                  
-
-                ani.speed = 1f;
+                    ani.speed = 1f;
                 }
                 isE = false;
                 eTime = 0;
 
-                GameControl_Scene.Instance.QieHuanScene();
+         
             }
         }
-        
+       
+        if (jinduImage.fillAmount >= 1)
+        {
+            Debug.Log("进入下一个场景 ");
+            GameControl_Scene.Instance.QieHuanScene();
+            jinduImage.fillAmount = 0;
+        }
+
     }
 
     public void Event_1()

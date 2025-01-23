@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BirdController : MonoBehaviour
 {
@@ -11,8 +12,10 @@ public class BirdController : MonoBehaviour
     public float responsiveness = 10f;
     //在滚动等情况时的反馈
 
+    public float deceleration = 0.05f;
+
     public float throttle;
-    private float roll;
+    //private float roll;
     private float pitcch;
     private float yaw;
     public float rollstep = 1;
@@ -20,6 +23,8 @@ public class BirdController : MonoBehaviour
     public float yawstep = 1;
 
     public int indexBB=0;
+
+    public bool isDiu = false;
     private float responseModifier
     {
         get
@@ -36,22 +41,29 @@ public class BirdController : MonoBehaviour
 
     private void HandleInputs()
     {
-        roll = Input.GetAxis("Roll");
+        //roll = Input.GetAxis("Roll");
         pitcch = Input.GetAxis("Pitch");
         yaw = Input.GetAxis("Yaw");
 
         if (Input.GetKey(KeyCode.Space)) throttle += throttleIncrement;
         else if (Input.GetKey(KeyCode.LeftControl)) throttle -= throttleIncrement;
-        throttle = Mathf.Clamp(throttle, 0f, 70f);
+        else throttle -= deceleration;
+        throttle = Mathf.Clamp(throttle, 0f, 100f);
     }
     private void Update()
     {
         HandleInputs();
 
-        if (Input.GetKeyDown(KeyCode.O))
+
+        if (isDiu == true)
         {
-            CreateBaBa();
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                CreateBaBa();
+            }
         }
+
     }
 
     private void FixedUpdate()
@@ -60,7 +72,7 @@ public class BirdController : MonoBehaviour
         rb.AddTorque(transform.up * /*Mathf.Clamp(yaw, -30f, 30f)*/yaw * responseModifier);
         rb.AddTorque(transform.up * /*Mathf.Clamp(yaw, -30f, 30f)*/yaw * responseModifier);
         rb.AddTorque(transform.right * pitcch * responseModifier);
-        rb.AddTorque(-transform.forward * roll * rollstep * responseModifier);
+        //rb.AddTorque(-transform.forward * roll * rollstep * responseModifier);
 
     }
 
@@ -68,11 +80,18 @@ public class BirdController : MonoBehaviour
     public void CreateBaBa()
     {
         if (indexBB >= 10)
+        {
+            GameControl_Scene.Instance.jishuObj.transform.GetChild(0).GetComponent<Text>().text = "无次数";
+            isDiu = false;
             return;
+        }
+        
 
         indexBB++;
-        GameObject obj = Instantiate(Resources.Load("baba"),transform) as GameObject; 
+        GameObject obj = Instantiate(Resources.Load("baba"),transform) as GameObject;
+        GameControl_Scene.Instance.jishuObj.transform.GetChild(0).GetComponent<Text>().text = "当前剩余： " + (10 - indexBB) + " 次";
 
-           
+
+
     }
 }

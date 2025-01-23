@@ -25,13 +25,13 @@ public class NPC_1Control : MonoBehaviour
 
     void Start()
     {
-        MoveToTarget1_Event();
+        //MoveToTarget1_Event();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("当前是否范围内 == " + isState);
+      
         anjianTisHI.SetActive(isState);
         //Debug.Log( "  距离："+Vector3.Distance(transform.position, haiouObj.transform.position));
         if (Vector3.Distance(transform.position, haiouObj.transform.position) < 7)
@@ -66,71 +66,39 @@ public class NPC_1Control : MonoBehaviour
 
     }
 
-    public void MoveToTarget1_Event()
-    {
-        transform.DOMove(tag1Point.transform.position, 10f);
-        Invoke("NpcRotate_1", 10f);
-    }
+   
+  
 
-    public void NpcRotate_1()
-    {
-        transform.DORotate(new Vector3(0, 90, 0), 1f);
-        ain.SetFloat("peopleSpeed",6);
-        Invoke("MoveToTarget2_Event",1.5f);
-      
-    }
-
-
-    public void MoveToTarget2_Event()
-    {
-        transform.DOMove(tag2Point.transform.position, 10f);
-        Invoke("NpcRotate_2", 10f);
-    }
-
-    public void NpcRotate_2()
-    {
-        transform.DORotate(new Vector3(0, -90, 0), 1f);
-        Invoke("MoveToTarget1_Event", 1.5f);
-    }
-
-
-
-    IEnumerator MovePostion()
-    {
-        yield return new WaitForSeconds(5f);
-
-    }
-
-    IEnumerator Loadlevel()
-    {
+    //IEnumerator Loadlevel()
+    //{
 
     
 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-        operation.allowSceneActivation = false;
+    //    AsyncOperation operation = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+    //    operation.allowSceneActivation = false;
 
-        while (!operation.isDone) 
-        {
-            slider.value = operation.progress;
+    //    while (!operation.isDone) 
+    //    {
+    //        slider.value = operation.progress;
 
-            if(operation.progress >= 0.9f)
-            {
-                slider.value = 1;
+    //        if(operation.progress >= 0.9f)
+    //        {
+    //            slider.value = 1;
 
-                if (Input.anyKeyDown) 
-                {
-                    operation.allowSceneActivation = true;
-                }
-
-
-            }
+    //            if (Input.anyKeyDown) 
+    //            {
+    //                operation.allowSceneActivation = true;
+    //            }
 
 
-            yield return null;
+    //        }
+
+
+    //        yield return null;
 
         
-        }
-    }
+    //    }
+    //}
 
 
 
