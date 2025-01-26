@@ -50,11 +50,12 @@ public class NPC_1Control : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("当前切换到下一状态");
+                GameControl_Scene.Instance.name = transform.name;
+                GameControl_Scene.Instance.SetName(transform.name);
+                Debug.Log("当前切换到下一状态 当前名字：" + transform.name);
 
                 //StartCoroutine(Loadlevel());
-
-
+               
                 loadscreen.SetActive(true);
 
                 //Scene2.SetActive(true);

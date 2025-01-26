@@ -12,7 +12,8 @@ public class MovePeopleControl : MonoBehaviour
     public bool isLookat = false;
     public bool isMove = true;
     public Vector3 rotationFix;
-
+    public Avatar peopleAvart;
+    public GameObject zhadanObj;
     public float speed = 5f;
     private Vector3 guardPos;
     private void Awake()
@@ -68,11 +69,16 @@ public class MovePeopleControl : MonoBehaviour
 
             //播放投掷动画 
             //CancelInvoke();
+            ani.avatar = null; 
+            ani.SetBool("TouZhi",true);
+
         }
         else
         {
             isLookat = false; // 打开朝向 
             isMove = true; //关闭移动
+            ani.avatar = peopleAvart;
+            ani.SetBool("TouZhi", false);
         }
    
 
@@ -85,7 +91,12 @@ public class MovePeopleControl : MonoBehaviour
         StartCoroutine(AniEvent());
     }
 
+    public void Create()
+    {
+       GameObject obj =  Instantiate(zhadanObj,transform);
+        obj.SetActive(true);
 
+    }
 
     IEnumerator AniEvent()
     {

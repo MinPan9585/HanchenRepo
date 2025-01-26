@@ -10,11 +10,16 @@ public class GameControl_Scene : MonoBehaviour
     public GameObject sceen2;
 
     public GameObject scene_Player;//베타
+    public GameObject scene_Player2;//베타
 
     public GameObject guoduParentObj;
 
 
     public GameObject jishuObj;
+
+    public string name;
+    public List<GameObject> peopleAniList = new List<GameObject>();
+    public GameObject npcThis;
     private void Awake()
     {
         Instance = this;
@@ -23,7 +28,7 @@ public class GameControl_Scene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        jishuObj.SetActive(false);
+        //jishuObj.SetActive(false);
     }
 
     // Update is called once per frame
@@ -64,5 +69,26 @@ public class GameControl_Scene : MonoBehaviour
         scene_Player.GetComponent<BirdController>().isDiu = true;
         jishuObj.SetActive(true);
 
+    }
+
+    public void SetName(string objName)
+    {
+
+       
+        for (int i = 0; i < peopleAniList.Count; i++)
+        {
+           
+            if (objName.Equals(peopleAniList[i].name))
+            {
+                peopleAniList[i].SetActive(true);
+                npcThis = peopleAniList[i];
+            }
+            else
+            {
+                peopleAniList[i].SetActive(false);
+            }
+        }
+
+      
     }
 }

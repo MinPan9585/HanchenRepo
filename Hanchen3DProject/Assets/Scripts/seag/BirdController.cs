@@ -25,6 +25,7 @@ public class BirdController : MonoBehaviour
     public int indexBB=0;
 
     public bool isDiu = false;
+    public bool isMove = true;
     private float responseModifier
     {
         get
@@ -52,7 +53,11 @@ public class BirdController : MonoBehaviour
     }
     private void Update()
     {
-        HandleInputs();
+        if (isMove)
+        {
+            HandleInputs();
+        }
+   
 
 
         if (isDiu == true)
@@ -92,6 +97,18 @@ public class BirdController : MonoBehaviour
         GameControl_Scene.Instance.jishuObj.transform.GetChild(0).GetComponent<Text>().text = "µ±«∞ £”‡£∫ " + (10 - indexBB) + " ¥Œ";
 
 
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        Debug.Log("Name:" + other.name);
+        transform.transform.GetChild(0).GetComponent<Animation>().enabled = false;
+        transform.transform.GetChild(0).GetComponent<Animator>().enabled = true;
+        isMove = false;
+
+        transform.GetComponent<Rigidbody>().useGravity = true;
 
     }
 }

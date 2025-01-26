@@ -30,73 +30,104 @@ public class AnimationControl_Player : MonoBehaviour
         {
 
             qTime += Time.deltaTime;
-            //Debug.Log("当前QTime时间："+ qTime);
+            Debug.Log("当前QTime时间："+ qTime);
 
-            if (Input.GetKeyDown(KeyCode.A))
+
+            if (qTime >= 3)
             {
-                if (qTime >= 3)
-                {
-                    Debug.Log("时间超过了3秒");
+                Debug.Log("时间超过了3秒");
+                GameControl_Scene.Instance.npcThis.GetComponent<NPCAnimatorControl>().SetGameOver();
+                ani.speed = 0f;
 
-                }
-                else
+                ani.Play("DEATH");
+               
+
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.A))
                 {
                     Debug.Log("Q逻辑完成");
                     ani.speed = 1f;
                     jinduImage.fillAmount += 0.35f;
+                    GameControl_Scene.Instance.npcThis.GetComponent<NPCAnimatorControl>().SetHuiTou1_False();
+                    GameControl_Scene.Instance.npcThis.GetComponent<NPCAnimatorControl>().SetHuiTou2_False();
+                    isQ = false;
+                    qTime = 0;
                 }
-                isQ = false;
-                qTime = 0;
-
             }
+           
+           
         }
 
         if (isT == true)
         {
             tTime += Time.deltaTime;
 
-            if (Input.GetKeyDown(KeyCode.S))
+
+            if (tTime >= 3)
             {
-                if (tTime >= 3)
-                {
-                    Debug.Log("时间超过了3秒");
-                }
-                else
+                Debug.Log("时间超过了3秒");
+                ani.speed = 1;
+                GameControl_Scene.Instance.npcThis.GetComponent<NPCAnimatorControl>().SetGameOver();
+            }
+            else
+            {
+
+                if (Input.GetKeyDown(KeyCode.S))
                 {
                     Debug.Log("T逻辑完成");
                     ani.speed = 1f;
                     jinduImage.fillAmount += 0.35f;
+                    GameControl_Scene.Instance.npcThis.GetComponent<NPCAnimatorControl>().SetHuiTou1_False();
+                    GameControl_Scene.Instance.npcThis.GetComponent<NPCAnimatorControl>().SetHuiTou2_False();
 
+
+                    isT = false;
+                    tTime = 0;
                 }
-
-                isT = false;
-                tTime = 0;
+            
             }
+          
         }
 
         if (isE == true)
         {
             eTime += Time.deltaTime;
-            if (Input.GetKeyDown(KeyCode.D))
+
+
+            if (eTime >= 3)
             {
-                if (eTime >= 3)
+                Debug.Log("时间超过了3秒");
+                //GameControl_Scene.Instance.npcThis.GetComponent<NPCAnimatorControl>().SetHuiTou1_False();
+                //GameControl_Scene.Instance.npcThis.GetComponent<NPCAnimatorControl>().SetHuiTou2_Ture();
+
+                GameControl_Scene.Instance.npcThis.GetComponent<NPCAnimatorControl>().SetGameOver();
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.D))
                 {
-                    Debug.Log("时间超过了3秒");
-                }
-                else
-                {
+
+
                     Debug.Log("E逻辑完成");
                     jinduImage.fillAmount += 0.35f;
-
+                    GameControl_Scene.Instance.npcThis.GetComponent<NPCAnimatorControl>().SetHuiTou1_False();
+                    GameControl_Scene.Instance.npcThis.GetComponent<NPCAnimatorControl>().SetHuiTou2_False();
+                    
                     ani.speed = 1f;
-                }
-                isE = false;
-                eTime = 0;
+                    isE = false;
+                    eTime = 0;
 
-         
+
+                }
+               
             }
+           
         }
        
+
+        
         if (jinduImage.fillAmount >= 1)
         {
             Debug.Log("进入下一个场景 ");
