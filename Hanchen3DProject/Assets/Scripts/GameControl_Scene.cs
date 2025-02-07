@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class GameControl_Scene : MonoBehaviour
 {
     public static GameControl_Scene Instance;
     public GameObject scene1;
     public GameObject sceen2;
+    public GameObject sceen3;
 
     public GameObject scene_Player;//海鸥
     public GameObject scene_Player2;//海鸥
@@ -39,29 +41,75 @@ public class GameControl_Scene : MonoBehaviour
 
     public void QieHuanScene()
     {
-        StartCoroutine(GuoDuAni());
+        Debug.Log("1111111");
+        npcThis.GetComponent<NPCAnimatorControl>().PlayGameOKAni();
+        //StartCoroutine(GuoDuAni());
     }
 
 
-    IEnumerator GuoDuAni()
+    //IEnumerator GuoDuAni()
+    //{
+
+    //    Debug.Log("222222222");
+
+
+    //    yield return new WaitForSeconds(7.5f);  //修改中间过度时间
+
+
+    //}
+    /// <summary>
+    /// 播放完沮丧动画之后的回调
+    /// </summary>
+    public void Event_AniOver()
     {
-        scene1.SetActive(true);
+        StartCoroutine(OKGame());
+    }
 
-        sceen2.SetActive(false);
-        guoduParentObj.SetActive(true);
-        yield return new WaitForSeconds(2f);
 
-        guoduParentObj.SetActive(false);
-        yield return new WaitForSeconds(1f);
-        scene1.SetActive(true);
+    IEnumerator OKGame()
+    {
+        GameEnd_OK();
 
-        sceen2.SetActive(false);
+        yield return new WaitForSeconds(3f);
+        scene_Player.transform.DOLocalMove(new Vector3(-203.8f, 23.1f, 92.74803f), 0f);  //修改出生点
+        scene_Player.transform.DOLocalRotate(new Vector3(0f, 180f, 0f), 0f);
         scene_Player.SetActive(true);
+        scene1.SetActive(true);
+
+        yield return new WaitForSeconds(3f);
+        sceen3.SetActive(false);
+
+
+        sceen2.SetActive(false);
+
+        //guoduParentObj.SetActive(true);
+        //yield return new WaitForSeconds(2f);
+
+        //guoduParentObj.SetActive(false);
+        //yield return new WaitForSeconds(1f);
+
+
+
         //scene_Player.transform.DOLocalMove(new Vector3(-28.1f, 5.620674f, 40.4557f), 0f);
         //scene_Player.transform.DORotate(new Vector3(250f, -90f, -180f), 0f);
-       
+
 
         StartGame3();
+    }
+
+
+    public void OkLiuCheng()
+    {
+        
+    }
+
+    public void GameOver()
+    {
+        //sceen2.SetActive(false);
+        //scene1.SetActive(true);
+        //scene_Player.SetActive(true);
+
+        SceneManager.LoadScene(1);
     }
     //开始第三种玩法
     public void StartGame3()
@@ -91,4 +139,16 @@ public class GameControl_Scene : MonoBehaviour
 
       
     }
+
+    public void GameEnd_OK()
+    {
+
+
+        sceen2.SetActive(false);
+        scene1.SetActive(false);
+        sceen3.SetActive(true);
+    }
+
+
+
 }

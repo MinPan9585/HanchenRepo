@@ -17,6 +17,11 @@ public class AnimationControl_Player : MonoBehaviour
     float tTime = 0f;
     float eTime = 0f;
 
+
+    public GameObject QSprite;
+    public GameObject TSprite;
+    public GameObject ESprite;
+
     public Image jinduImage;
     void Start()
     {
@@ -30,7 +35,7 @@ public class AnimationControl_Player : MonoBehaviour
         {
 
             qTime += Time.deltaTime;
-            Debug.Log("当前QTime时间："+ qTime);
+            //Debug.Log("当前QTime时间："+ qTime);
 
 
             if (qTime >= 3)
@@ -131,7 +136,12 @@ public class AnimationControl_Player : MonoBehaviour
         if (jinduImage.fillAmount >= 1)
         {
             Debug.Log("进入下一个场景 ");
+            //GameControl_Scene.Instance.scene_Player2.transform.GetChild(0).GetComponent<Animation>().enabled = false;
+            GameControl_Scene.Instance.scene_Player2.SetActive(false);
             GameControl_Scene.Instance.QieHuanScene();
+            isT = false;
+            isQ = false;
+            isE = false;
             jinduImage.fillAmount = 0;
         }
 
@@ -139,24 +149,68 @@ public class AnimationControl_Player : MonoBehaviour
 
     public void Event_1()
     {
-        Debug.Log("Q");
-        isQ = true;
-        ani.speed = 0;
+
+        EventAll();
+
+
+
 
         //Q的UI展示出来 动画暂停 
     }
 
     public void Event_2()
     {
-        Debug.Log("T");
-        isT = true;
-        ani.speed = 0;
+        EventAll();
     }
 
     public void Event_3()
     {
-        Debug.Log("E");
-        isE = true;
+        EventAll();
+    }
+
+    public void  EventAll()
+    {
         ani.speed = 0;
+
+        QSprite.GetComponent<QTEImage_ItemState>().StopInvoke();
+        TSprite.GetComponent<QTEImage_ItemState>().StopInvoke();
+        ESprite.GetComponent<QTEImage_ItemState>().StopInvoke();
+
+        int ranomInt = Random.Range(0, 2);
+        Debug.Log("ranomInt:"+ranomInt);
+        switch (ranomInt)
+        {
+            case 0:
+                Debug.Log("Q");
+                isQ = true;
+                ani.speed = 0;
+                QSprite.GetComponent<QTEImage_ItemState>().SetSperite_1();
+                break;
+
+            
+
+            
+
+            case 1:
+                Debug.Log("T");
+                isT = true;
+                ani.speed = 0;
+                TSprite.GetComponent<QTEImage_ItemState>().SetSperite_1();
+                break;
+
+            
+            case 2:
+
+                Debug.Log("E");
+                isE = true;
+                ani.speed = 0;
+                ESprite.GetComponent<QTEImage_ItemState>().SetSperite_1();
+                break;
+
+            default:
+
+                break;
+
+        }
     }
 }

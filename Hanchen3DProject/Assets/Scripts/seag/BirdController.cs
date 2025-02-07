@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BirdController : MonoBehaviour
 {
@@ -26,6 +27,17 @@ public class BirdController : MonoBehaviour
 
     public bool isDiu = false;
     public bool isMove = true;
+
+
+    public GameObject deathPanel;                 // 死亡 UI 面板
+    public Button restartButton;                 // 重新游玩按钮
+    public Button returnToMainMenuButton;        // 返回主菜单按钮
+
+    private bool isDead = false;
+
+
+
+
     private float responseModifier
     {
         get
@@ -39,6 +51,17 @@ public class BirdController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
+
+    private void Start()
+    {
+        deathPanel.SetActive(false);
+
+        restartButton.onClick.AddListener(OnRestartButtonClicked);
+        returnToMainMenuButton.onClick.AddListener(OnReturnToMainMenuButtonClicked);
+    }
+
+
+
 
     private void HandleInputs()
     {
@@ -102,13 +125,53 @@ public class BirdController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (transform.name != "Seagull_Player 2")
+        {
 
-        Debug.Log("Name:" + other.name);
-        transform.transform.GetChild(0).GetComponent<Animation>().enabled = false;
-        transform.transform.GetChild(0).GetComponent<Animator>().enabled = true;
-        isMove = false;
+            Debug.Log("Name:" + other.name);
+            transform.transform.GetChild(0).GetComponent<Animation>().enabled = false;
+            transform.transform.GetChild(0).GetComponent<Animator>().enabled = true;
+            isMove = false;
 
-        transform.GetComponent<Rigidbody>().useGravity = true;
+            transform.GetComponent<Rigidbody>().useGravity = true;
+
+            // 标记角色死亡
+            isDead = true;
+
+            // 延迟 3 秒后显示死亡 UI 面板
+            Invoke("ShowDeathPanel", 3f);
+
+        }
 
     }
+
+    void ShowDeathPanel()
+    {
+        if (isDead)
+        {
+            deathPanel.SetActive(true);
+            Time.timeScale = 0; // 暂停游戏
+        }
+    }
+
+    void OnRestartButtonClicked()
+    {
+        // 恢复游戏时间
+        Time.timeScale = 1;
+
+        // 重新加载当前场景
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void OnReturnToMainMenuButtonClicked()
+    {
+        // 恢复游戏时间
+        Time.timeScale = 1;
+
+        // 加载主菜单场景
+        SceneManager.LoadScene("Start"); // 替换为你的主菜单场景名称
+    }
+
+
+
 }

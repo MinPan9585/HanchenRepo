@@ -21,7 +21,7 @@ public class SliderControl_Item : MonoBehaviour
     private void OnEnable()
     {
        
-        InvokeRepeating("SetValue",0,0.2f);
+        InvokeRepeating("SetValue",0,0.0002f);
        
     }
 

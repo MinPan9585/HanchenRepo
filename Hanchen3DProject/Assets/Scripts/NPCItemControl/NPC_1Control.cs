@@ -15,6 +15,7 @@ public class NPC_1Control : MonoBehaviour
     public GameObject anjianTisHI;
     public bool isState = false;
     public GameObject Scene2;
+    public GameObject Scene1;
     public Animator ain; //动画状态机
     // Start is called before the first frame update
 
@@ -50,15 +51,17 @@ public class NPC_1Control : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                GameControl_Scene.Instance.scene_Player.SetActive(false) ;
                 GameControl_Scene.Instance.name = transform.name;
                 GameControl_Scene.Instance.SetName(transform.name);
                 Debug.Log("当前切换到下一状态 当前名字：" + transform.name);
 
                 //StartCoroutine(Loadlevel());
-               
+
                 loadscreen.SetActive(true);
 
                 //Scene2.SetActive(true);
+                //Scene1.SetActive(false);
                 //haiouObj.SetActive(false);
 
             }
